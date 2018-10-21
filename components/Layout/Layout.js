@@ -50,7 +50,7 @@ const Content = styled.section`
 
 class Layout extends Component {
   state = {
-    isDarkTheme: false
+    isDarkTheme: true
   }
 
   toggleTheme = () => {
