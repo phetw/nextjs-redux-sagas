@@ -14,11 +14,11 @@ const HeaderContainer = styled.nav`
   opacity: 0.975;
   box-shadow: 0 1px 10px 1px rgba(40, 41, 44, 0.12);
   transition: background-color 300ms ease;
-  background-color: ${props => (props.dark ? 'black' : 'white')};
+  background-color: ${props => (props.theme.dark ? 'black' : 'white')};
   a {
-    color: ${props => (!props.dark ? 'black' : 'white')};
+    color: ${props => (!props.theme.dark ? 'black' : 'white')};
     &:hover {
-      border-bottom: 2px solid ${props => (!props.dark ? '#222' : 'white')};
+      border-bottom: 2px solid ${props => (!props.theme.dark ? '#222' : 'white')};
     }
   }
 `
@@ -40,18 +40,20 @@ const StyledNextLink = styled.a`
 `
 
 const NextLink = ({ href, children }) => (
-  <Link href={href}>
+  <Link prefetch href={href}>
     <StyledNextLink>{children}</StyledNextLink>
   </Link>
 )
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
     return (
-      <HeaderContainer dark={this.props.isDarkTheme}>
+      <HeaderContainer>
         <NextLink href="/">Home</NextLink>
         <NextLink href="/about">About</NextLink>
       </HeaderContainer>
     )
   }
 }
+
+export default Header
