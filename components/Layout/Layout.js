@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     font-family: 'Roboto Mono Regular';
     transition: background-color 300ms ease;
-    background-color: ${props => (props.theme.dark ? 'black' : 'white')};
+    background-color: ${props => (props.theme.dark ? 'black' : 'white')}!important;
   }
   h1,h2,h3,h4,h5,h6{
     font-family: 'Roboto Mono Bold';
@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
   p{
     font-family: 'Roboto Mono Regular';
   }
-  h1,h2,h3,h4,h5,h6,p{
+  h1,h2,h3,h4,h5,h6,p,li{
     color: ${props => (props.theme.dark ? 'white' : 'black')};
   }
   button{
@@ -66,8 +66,8 @@ class Layout extends Component {
         <Fragment>
           <GlobalStyle />
           <LayoutContainer>
-            <Header isDarkTheme={isDarkTheme} />
-            <ThemeToggler theme={isDarkTheme ? 'Dark' : 'Light'} toggle={this.toggleTheme} />
+            <Header />
+            <ThemeToggler toggle={this.toggleTheme} />
             <Content>{this.props.children}</Content>
           </LayoutContainer>
         </Fragment>
