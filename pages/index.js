@@ -1,14 +1,49 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 
-const Home = () => (
-  <Fragment>
-    <h2>Home</h2>
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia molestias labore ipsum? Accusamus ducimus voluptatem totam eum eligendi aperiam officiis dicta quae suscipit quaerat repellat,
-      expedita aliquid sunt rerum optio id eius commodi consequatur. Doloribus dolorum architecto laboriosam asperiores et praesentium possimus. Quaerat reiciendis, ipsam tempore obcaecati corporis
-      nisi mollitia.
-    </p>
-  </Fragment>
-)
+import { connect } from 'react-redux'
+import { increment, decrement, reset } from '../actions'
 
-export default Home
+class Home extends Component {
+  static async getInitialProps(props) {
+    const { store, isServer } = props.ctx
+    store.dispatch(tickClock(isServer))
+
+    if (!store.getState().placeholderData) {
+      store.dispatch(loadData())
+    }
+
+    return { isServer }
+  }
+
+  increment = () => {
+    this.props.dispatch(increment())
+  }
+
+  decrement = () => {
+    this.props.dispatch(decrement())
+  }
+
+  reset = () => {
+    this.props.dispatch(reset())
+  }
+
+  render() {
+    const { count = 0 } = this.props
+    return (
+      <Fragment>
+        <h3>{count}</h3>
+        <button onClick={this.increment}>+1</button>
+        <button onClick={this.decrement}>-1</button>
+        <button onClick={this.reset}>Reset</button>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quis exercitationem placeat suscipit quibusdam adipisci, rem inventore provident. Ad praesentium tempora ut sapiente eos,
+          asperiores rerum illum adipisci odit doloribus cum quidem numquam non, hic nostrum. Est et illo non.
+        </p>
+      </Fragment>
+    )
+  }
+}
+
+const mapStateToProps = state => ({ count: state.count })
+
+export default connect(mapStateToProps)(Home)
