@@ -6,6 +6,6 @@ const ThemeSwicther = styled.button`
   padding: 0.5rem 1.25rem;
   background-color: pink;
 `
-const ThemeSwictherButton = ({ toggle, theme }) => <ThemeSwicther onClick={toggle}>{theme.dark ? 'Dark' : 'Light'}</ThemeSwicther>
+const ThemeSwictherButton = ({ toggle, theme }) => <ThemeSwicther onClick={toggle}>{!theme.dark ? 'Dark' : 'Light'} mode</ThemeSwicther>
 
 export default withTheme(ThemeSwictherButton)

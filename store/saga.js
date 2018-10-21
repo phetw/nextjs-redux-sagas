@@ -1,28 +1,19 @@
-import { delay } from 'redux-saga'
-import { all, call, put, take, takeLatest } from 'redux-saga/effects'
+import { all, put, call, takeLatest } from 'redux-saga/effects'
 
-import { actionTypes, failure, loadDataSuccess, tickClock } from '../actions'
+import { actionTypes, requestUsersSuccess, requestUsersError } from '../actions'
+import API from '../services/api'
 
-function* runClockSaga() {
-  yield take(actionTypes.START_CLOCK)
-  while (true) {
-    yield put(tickClock(false))
-    yield call(delay, 1000)
-  }
-}
-
-function* loadDataSaga() {
+function* getGithubUsersSaga() {
   try {
-    const res = yield fetch('https://jsonplaceholder.typicode.com/users')
-    const data = yield res.json()
-    yield put(loadDataSuccess(data))
+    const { data: { items } } = yield call(API.get)
+    yield put(requestUsersSuccess(items))
   } catch (err) {
-    yield put(failure(err))
+    yield put(requestUsersError(err))
   }
 }
 
 function* rootSaga() {
-  yield all([call(runClockSaga), takeLatest(actionTypes.LOAD_DATA, loadDataSaga)])
+  yield all([takeLatest(actionTypes.GET_GITHUB_USERS, getGithubUsersSaga)])
 }
 
 export default rootSaga

@@ -1,52 +1,26 @@
 export const actionTypes = {
-  FAILURE: 'FAILURE',
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET',
-  LOAD_DATA: 'LOAD_DATA',
-  LOAD_DATA_SUCCESS: 'LOAD_DATA_SUCCESS',
-  START_CLOCK: 'START_CLOCK',
-  TICK_CLOCK: 'TICK_CLOCK'
+  GET_GITHUB_USERS: 'GET_GITHUB_USERS',
+  GET_GITHUB_USERS_SUCCESS: 'GET_GITHUB_USERS_SUCCESS',
+  GET_GITHUB_USERS_ERROR: 'GET_GITHUB_USERS_ERROR'
 }
 
-export function failure(error) {
+export function requestUsers() {
   return {
-    type: actionTypes.FAILURE,
-    error
+    type: actionTypes.GET_GITHUB_USERS,
+    loading: true
   }
 }
 
-export function increment() {
-  return { type: actionTypes.INCREMENT }
-}
-
-export function decrement() {
-  return { type: actionTypes.DECREMENT }
-}
-
-export function reset() {
-  return { type: actionTypes.RESET }
-}
-
-export function loadData() {
-  return { type: actionTypes.LOAD_DATA }
-}
-
-export function loadDataSuccess(data) {
+export function requestUsersSuccess(data) {
   return {
-    type: actionTypes.LOAD_DATA_SUCCESS,
+    type: actionTypes.GET_GITHUB_USERS_SUCCESS,
     data
   }
 }
 
-export function startClock() {
-  return { type: actionTypes.START_CLOCK }
-}
-
-export function tickClock(isServer) {
+export function requestUsersError(error) {
   return {
-    type: actionTypes.TICK_CLOCK,
-    light: !isServer,
-    ts: Date.now()
+    type: actionTypes.GET_GITHUB_USERS_ERROR,
+    error
   }
 }

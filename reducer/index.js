@@ -1,51 +1,28 @@
 import { actionTypes } from '../actions'
 
-export const exampleInitialState = {
-  count: 0,
+export const initialStates = {
+  users: [],
   error: false,
-  lastUpdate: 0,
-  light: false,
-  placeholderData: null
+  loading: true
 }
 
-function reducer(state = exampleInitialState, action) {
+function reducer(state = initialStates, action) {
   switch (action.type) {
-    case actionTypes.FAILURE:
+    case actionTypes.GET_GITHUB_USERS:
       return {
         ...state,
-        ...{ error: action.error }
+        loading: true
       }
-
-    case actionTypes.INCREMENT:
+    case actionTypes.GET_GITHUB_USERS_SUCCESS:
       return {
         ...state,
-        ...{ count: state.count + 1 }
+        ...{ users: action.data, loading: false }
       }
-
-    case actionTypes.DECREMENT:
+    case actionTypes.GET_GITHUB_USERS_ERROR:
       return {
         ...state,
-        ...{ count: state.count - 1 }
+        ...{ error: action.error, loading: false }
       }
-
-    case actionTypes.RESET:
-      return {
-        ...state,
-        ...{ count: exampleInitialState.count }
-      }
-
-    case actionTypes.LOAD_DATA_SUCCESS:
-      return {
-        ...state,
-        ...{ placeholderData: action.data }
-      }
-
-    case actionTypes.TICK_CLOCK:
-      return {
-        ...state,
-        ...{ lastUpdate: action.ts, light: !!action.light }
-      }
-
     default:
       return state
   }
