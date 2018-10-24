@@ -1,8 +1,8 @@
 {
-  "name": "github-stats-Thailand",
+  "name": "nextjs-redux-sagas",
   "version": "0.0.1",
   "main": "index.js",
-  "repository": "https://github.com/rappad/github-stats-Thailand.git",
+  "repository": "https://github.com/rappad/nextjs-redux-sagas.git",
   "author": "was.li <wasuwat.se@gmail.com>",
   "license": "MIT",
   "scripts": {
