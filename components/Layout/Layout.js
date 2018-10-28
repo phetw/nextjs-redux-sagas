@@ -5,26 +5,9 @@ import Header from './Header'
 import ThemeToggler from './ThemeToggler'
 
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: "Roboto Mono Regular";
-    src: url('../static/fonts/RobotoMono-Regular.ttf')
-  }
-  @font-face {
-    font-family: "Roboto Mono Bold";
-    src: url('../static/fonts/RobotoMono-Bold.ttf')
-  }
   body {
-    margin:0;
-    padding:0;
-    font-family: 'Roboto Mono Regular';
     transition: background-color 300ms ease;
     background-color: ${props => (props.theme.dark ? 'black' : 'white')}!important;
-  }
-  h1,h2,h3,h4,h5,h6{
-    font-family: 'Roboto Mono Bold';
-  }
-  p{
-    font-family: 'Roboto Mono Regular';
   }
   h1,h2,h3,h4,h5,h6,p,li{
     color: ${props => (props.theme.dark ? 'white' : 'black')};
